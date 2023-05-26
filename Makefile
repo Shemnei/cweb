@@ -3,7 +3,7 @@
 # C compiler
 CC := gcc
 # C compiler flags
-CFLAGS := -std=c11 -pedantic -Wall
+CFLAGS := -std=c11 -pedantic -Wall -Werror -Wextra
 
 # Source directory
 SRCDIR := src
