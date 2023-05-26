@@ -19,7 +19,7 @@ INCS := $(shell find $(SRCDIR) -type d)
 # All intermediate object files
 OBJS := $(SRCS:%=$(OUTDIR)/%.o)
 
-# Include flags
+# Include flags (removes the need for relative paths)
 INCFLAGS := $(addprefix -I,$(INCS))
 
 # Combines all objects into final executable
@@ -38,3 +38,22 @@ clean:
 .PHONY: run
 run: $(OUTDIR)/$(EXEC)
 	./$(OUTDIR)/$(EXEC) ./srv
+
+CPPCHECK_OUTDIR := $(OUTDIR)/cppcheck
+CPPCHECK_REPORT := $(CPPCHECK_OUTDIR)/report.txt
+
+$(CPPCHECK_REPORT): $(SRCS) $(INCS)
+	mkdir -p $(dir $@)
+	cppcheck \
+		--report-progress \
+		--check-library \
+		--enable=warning,style \
+		--cppcheck-build-dir=$(CPPCHECK_OUTDIR) \
+		--std=c11 \
+		--output-file=$(CPPCHECK_REPORT) \
+		$(INCFLAGS) \
+		$(SRCDIR)
+
+.PHONY: check
+check: $(CPPCHECK_REPORT)
+	cat $(CPPCHECK_REPORT)
