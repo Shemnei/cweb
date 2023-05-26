@@ -37,4 +37,4 @@ clean:
 
 .PHONY: run
 run: $(OUTDIR)/$(EXEC)
-	./$(OUTDIR)/$(EXEC)
+	./$(OUTDIR)/$(EXEC) ./srv

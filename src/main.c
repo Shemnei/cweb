@@ -1,9 +1,11 @@
+#include <assert.h>
 #include <stdio.h>
 
-#include "http/http.h"
-
 int main(int argc, char **argv) {
-  printf("Hello World\n");
-  print_something();
-  return 0;
+  // Prevent unused paramter error for now
+  assert(argc == 2 && "No path given");
+
+  char *path = argv[1];
+
+  printf("Starting server for path: %s\n", path);
 }
