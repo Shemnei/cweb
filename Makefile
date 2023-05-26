@@ -42,7 +42,7 @@ run: $(OUTDIR)/$(EXEC)
 CPPCHECK_OUTDIR := $(OUTDIR)/cppcheck
 CPPCHECK_REPORT := $(CPPCHECK_OUTDIR)/report.txt
 
-$(CPPCHECK_REPORT): $(SRCS) $(INCS)
+$(CPPCHECK_REPORT): $(SRCS) $(INCS) Makefile
 	mkdir -p $(dir $@)
 	cppcheck \
 		--report-progress \
